@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lotto</title>
+    <style>
+        .gong {
+            border: 5px solid red;
+            background-color: white;
+            border-radius: 50%;
+            width: 22px;
+            padding: 10px;
+            text-align: center;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <h1>로또 번호 생성하기</h1>
+    <button onclick="setLottoHTML()" style="width: 275px; margin-bottom: 20px;">Click</button>
+    <div id="lotto"></div>
+</body>
+<script>
+    var lotto = document.getElementById("lotto");
+
+    function getLottoNum(){
+        return Math.floor(Math.random()*45)+1;
+    }
+
+    function getLuckyNum(){
+        var numbers = [];
+        while (numbers.length < 6) {
+            var newNum = getLottoNum();
+            if ( numbers.indexOf(newNum) < 0) {
+                numbers.push(newNum);
+            }
+        }
+        return numbers;
+    }
+
+    function setLottoHTML(){
+        var numbers = getLuckyNum();
+        var colors = ["red", "orange","yellow","green","blue","purple"];
+        var lottoHTML = '';
+        for (var i=0; i<6; i++){
+            lottoHTML += '<div class="gong" style="border: 5px solid '+colors[i]+'"><span class="number">'+numbers[i]+"</span></div>";
+        }
+        lotto.innerHTML = lottoHTML
+    }
+</script>
+</html>
